@@ -19,6 +19,16 @@
   padding-bottom: 10px;
 }
 
+.checkout__userEmail,
+.checkout__userEmailCartEmpty {
+  margin-left: 30px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+.checkout__userEmailCartEmpty {
+  margin-left: 0px;
+}
+
 @media screen and (max-width: 722px) {
   .checkout {
     display: flex;

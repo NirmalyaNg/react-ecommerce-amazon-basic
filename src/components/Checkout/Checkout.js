@@ -5,7 +5,7 @@ import "./Checkout.css";
 import SubTotal from "../SubTotal/SubTotal";
 
 const Checkout = () => {
-  const { basket } = useContext(GlobalContext);
+  const { basket, user } = useContext(GlobalContext);
   return (
     <div className="checkout">
       {/* Checkout Left (Add and products in basket) */}
@@ -18,6 +18,11 @@ const Checkout = () => {
 
         {basket?.length === 0 ? (
           <div>
+            {user && (
+              <h3 className="checkout__userEmailCartEmpty">
+                Hello {user?.email}
+              </h3>
+            )}
             <h2>Your Shopping Basket is empty</h2>
             <p>
               You have no items in your basket.To buy one item click on "Add to
@@ -26,10 +31,13 @@ const Checkout = () => {
           </div>
         ) : (
           <div>
+            {user && (
+              <h3 className="checkout__userEmail">Hello {user?.email}</h3>
+            )}
             <h2 className="checkout__title">Your Shopping Basket</h2>
-            {basket.map((item) => (
+            {basket?.map((item, index) => (
               <CheckoutProduct
-                key={item.id}
+                key={index}
                 id={item.id}
                 title={item.title}
                 price={item.price}
@@ -42,7 +50,7 @@ const Checkout = () => {
       </div>
 
       {/* Checkout Right (Subtotal) */}
-      {basket.length > 0 && (
+      {basket?.length > 0 && (
         <div className="checkout__right">
           <SubTotal basket={basket} />
         </div>

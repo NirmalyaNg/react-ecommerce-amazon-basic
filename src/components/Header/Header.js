@@ -4,9 +4,16 @@ import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { GlobalContext } from "../../GlobalContext/GlobalContext";
+import { auth } from "../../Firebase/firebase";
 
 const Header = () => {
-  const { basket } = useContext(GlobalContext);
+  const { basket, user } = useContext(GlobalContext);
+
+  const handleAuthentication = (e) => {
+    if (user) {
+      auth.signOut();
+    }
+  };
   return (
     <nav className="header">
       {/* Logo On the left */}
@@ -29,10 +36,13 @@ const Header = () => {
 
       <div className="header__nav">
         {/* Link 1 */}
-        <Link className="header__link" to="/login">
-          <div className="header__option">
-            <span>Hello</span>
-            <span>Sign In</span>
+        <Link className="header__link" to={!user ? "/login" : ""}>
+          <div
+            className="header__option"
+            onClick={(e) => handleAuthentication(e)}
+          >
+            <span>{user ? `Hello ${user.email}` : "Hello Guest"}</span>
+            <span>{user ? "Sign Out" : "Sign In"}</span>
           </div>
         </Link>
 

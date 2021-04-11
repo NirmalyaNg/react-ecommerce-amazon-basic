@@ -9,13 +9,16 @@ const SubTotal = ({ basket }) => {
     }, 0);
   return (
     <div className="subtotal">
-      <h2>Subtotal</h2>
       {/* Price  */}
       <p>
-        Subtotal ({basket.length} items) : <small>$</small>{" "}
+        Subtotal ({basket?.length} items) : <small>$</small>
         <strong>{total.toFixed(2)}</strong>
       </p>
       {/* Button  */}
+      <p className="subtotal__gift">
+        <input type="checkbox" />
+        <span className="subtotal__giftText">This order contains a gift</span>
+      </p>
       <button className="subtotal__button">Proceed to Checkout.</button>
     </div>
   );
